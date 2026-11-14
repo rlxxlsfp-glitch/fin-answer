@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="theme-color" content="#F6F7F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121513" media="(prefers-color-scheme: dark)">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>fin. 변형문제 답지</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="fin. 답지">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--bg:#F6F7F4;--card:#fff;--ink:#1F2421;--sub:#6B736D;--line:#E4E8E2;--sage:#6F8F74;--sage-d:#4F6F55;--sage-l:#E8EFE6;--hl:#D9E8C9;--warn:#B5644B}
+@media (prefers-color-scheme:dark){:root{--bg:#121513;--card:#1B1F1C;--ink:#E7ECE8;--sub:#9AA49D;--line:#2A312C;--sage:#7FA486;--sage-d:#A8CBAE;--sage-l:#243029;--hl:#3B5233;--warn:#E09A82}.chev{stroke:#5D665F}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;gap:10px;margin-bottom:18px;min-height:40px}
+.logo{font-weight:800;font-size:24px;letter-spacing:-.5px;background:linear-gradient(transparent 58%,var(--hl) 58%);padding:0 3px}
+.logo small{font-weight:500;font-size:13px;color:var(--sub);margin-left:6px;letter-spacing:0}
+.back{border:0;background:var(--card);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;box-shadow:0 0 0 1px var(--line);cursor:pointer}
+.back svg{width:20px;height:20px;stroke:var(--ink)}
+.crumb{font-size:13px;color:var(--sub)}
+.title{font-size:20px;font-weight:700;margin:2px 0 0}
+.sec{font-size:13px;font-weight:700;color:var(--sub);margin:22px 4px 10px;letter-spacing:.2px}
+.sets{display:grid;gap:10px}
+.set{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;cursor:pointer;text-align:left;font:inherit;color:inherit;transition:transform .08s}
+.set:active{transform:scale(.985)}
+.ic{width:44px;height:44px;border-radius:14px;background:var(--sage-l);display:grid;place-items:center;flex:none}
+.ic svg{width:22px;height:22px;stroke:var(--sage-d)}
+.set b{display:block;font-size:16px}
+.set span{font-size:13px;color:var(--sub)}
+.chev{margin-left:auto;width:18px;height:18px;stroke:#A9B1AB}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(98px,1fr));gap:8px}
+.chips.wide{grid-template-columns:1fr}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:14px 10px;font:inherit;font-size:15px;font-weight:700;cursor:pointer;color:var(--ink)}
+.chip small{display:block;font-weight:400;font-size:12px;color:var(--sub);margin-top:2px}
+.chips.wide .chip{text-align:left;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.chip.on{background:var(--sage);border-color:var(--sage);color:#fff}
+.chip.on small{color:#E6EEE4}
+.bar{display:flex;justify-content:space-between;align-items:center;margin:20px 4px 10px}
+.bar .sec{margin:0}
+.list{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.row{display:flex;gap:12px;padding:13px 16px;border-top:1px solid var(--line);align-items:flex-start}
+.row:first-child{border-top:0}
+.no{flex:none;min-width:56px;font-size:14px;font-weight:700;color:var(--sage-d);padding-top:2px}
+.ans{flex:1;min-width:0}
+.mk{font-size:22px;font-weight:700;letter-spacing:2px;line-height:1.25;word-break:keep-all}
+.mk.txt{font-size:15px;letter-spacing:0;font-weight:500;line-height:1.5}
+.note{font-size:13.5px;color:var(--sub);line-height:1.6;margin-top:4px;word-break:keep-all}
+.note.fix{color:var(--ink);background:var(--sage-l);display:inline-block;padding:3px 8px;border-radius:8px;font-weight:500}
+.miss{font-size:14px;color:var(--warn)}
+.hint{font-size:12.5px;color:var(--sub);margin:12px 4px 0;line-height:1.6}
+.view{will-change:transform,opacity}
+.set,.chip,.back{transition:transform .25s cubic-bezier(.2,.8,.2,1),background-color .25s,border-color .25s,color .25s,box-shadow .25s}
+.set:active,.chip:active,.back:active{transform:scale(.97)}
+button{font-weight:inherit}
+button:focus{outline:none}
+button:focus-visible{outline:2px solid var(--sage);outline-offset:2px}
+.stag{opacity:0;animation:rise .28s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.stag{animation:none;opacity:1}}
+.bar{display:flex;justify-content:space-between;align-items:center;margin:20px 4px 10px}
+.bar .sec{margin:0}
+.toggle{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 12px;font:inherit;font-size:13px;color:var(--sub);cursor:pointer;display:flex;gap:6px;align-items:center;justify-content:center;min-width:112px}
+.toggle svg{width:16px;height:16px;stroke:currentColor}
+.toggle.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.hide .ans{position:relative;cursor:pointer}
+.ans > *{transition:opacity .22s ease,filter .22s ease}
+.hide .ans:not(.open) > *{opacity:0;filter:blur(4px)}
+.hide .ans:not(.open)::after{content:"탭해서 보기";position:absolute;left:0;top:2px;font-size:13px;color:var(--sub);border:1px dashed var(--line);border-radius:8px;padding:4px 10px}
+.nav{display:flex;gap:8px;margin-top:14px}
+.nav button{flex:1;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:13px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;color:var(--ink);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.nav button:active,.toggle:active{transform:scale(.97)}
+.toggle{transition:transform .25s cubic-bezier(.2,.8,.2,1),background-color .25s,color .25s,border-color .25s}
+.nav button:disabled{opacity:.35}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+const D={"o1": {"7": [{"no": 1, "items": [["①", ""], ["②", ""], ["④", "글에서는 여러 의사들이 동물 실험보다 임상적 발견이 더 중요한 역할을 했다고 주장하며, 동물 실험의 지배적 역할을 지지하지 않는다."], ["③", "be tried"], ["legal necessity", ""], ["③", "independent"], ["④", ""], ["③", ""], ["②", ""]]}, {"no": 3, "items": [["④", ""], ["singularity", ""], ["②", "at which"], ["③", ""], ["③", "machine"], ["⑤", ""], ["④", ""]]}, {"no": 5, "items": [["④", ""], ["④", "easy"], ["③", ""], ["④", ""], ["⑤", ""], ["③", "행동을 정체성과 일치시키는 것이 지속적인 노력을 요구한다는 내용과 일치하지 않는다."], ["④", "행동을 정체성의 일부로 받아들이면 행동 수행이 단순화됩니다."]]}, {"no": 7, "items": [["②", ""], ["Boredom", ""], ["③", "enhance"], ["③", ""], ["③", ""], ["④", ""], ["①", ""], ["⑤", ""], ["②", ""]]}, {"no": 9, "items": [["time pressure", ""], ["②", ""], ["③", "더 부유한 국가는 그들만의 뚜렷한 스트레스를 가지고 있는데 핵심 쟁점은 시간 압박이다."], ["③", ""], ["④", "feeling"], ["④", ""], ["⑤", "lack"], ["③", ""]]}, {"no": 11, "items": [["⑤", "eliminate"], ["④", ""], ["②", ""], ["③", ""], ["⑤", "boring"], ["③", ""], ["viewpoint / point of view", ""]]}], "14": [{"no": 1, "items": [["①", ""], ["the harder we push towards a renewable energy system, the faster we have to use fossil energy for the construction process", ""], ["③", ""], ["⑤", "seldom"], ["④", ""], ["①", ""], ["⑤", ""], ["④", ""], ["③", "글에서는 재생 에너지 시스템 구축이 비용이 많이 들며, 그 비용이 종종 간과된다고 설명한다."]]}, {"no": 3, "items": [["③", ""], ["④", ""], ["④", ""], ["④", ""], ["⑤", ""], ["②", ""], ["①", ""], ["⑤", "defending"]]}, {"no": 5, "items": [["④", "thought"], ["④", ""], ["②", ""], ["③", ""], ["④", "wrong"], ["②", ""], ["③", ""], ["②", ""]]}, {"no": 7, "items": [["②", ""], ["③", "anonymously"], ["⑤", ""], ["②", ""], ["③", "come"], ["⑤", ""], ["③", ""], ["②", ""]]}, {"no": 9, "items": [["①", ""], ["①", "that"], ["④", ""], ["④", "세상 안의 특정한 특징에 초점을 맞춤으로서 세상을 이해하려는 우리의 경향"], ["③", "possible"], ["③", ""], ["⑤", ""], ["④", ""], ["②", ""]]}, {"no": 11, "items": [["①", "감정은 우리의 신체로부터 발생한다."], ["③", "Strange"], ["④", ""], ["⑤", "우리의 신체를 통해 전달되고 발생하는 감정"], ["④", "funnier"], ["③", ""], ["③", ""], ["④", "우리의 기분은 단순히 입꼬리를 올리는 것으로 좋아질 수 있다."]]}, {"no": 13, "items": [["⑤", "what"], ["①", ""], ["②", "그 아이디어가 물리적 실체로 바뀌기 훨씬 전에 마음은 완제품을 분명하게 그렸다."], ["③", ""], ["③", "physical"], ["④", ""], ["③", "마음속에서 완성된 아이디어를 통한 미래에 대한 설계"]]}, {"no": 15, "items": [["③", ""], ["②", "그러므로, 폐기물에 대한 확실한 처리시설을 확보한 기업들만이 신선한 식품을 판매하는 것에 대한 우선권을 가질 수 있다."], ["④", "allowed"], ["①", ""], ["⑤", "leading"], ["②", ""], ["②", "신선함에 대한 요구가 환경에 미치는 부정적인 영향"], ["③", ""]]}], "16": [{"no": 1, "items": [["①", ""], ["the brake / the wheels rubbing on the axles / air resistance", ""], ["③", ""], ["④", "글에서는 축과 바퀴 사이의 마찰이 자전거를 감속시키는 요인이라고 설명하며, 속도를 높이는 것이 아니다."], ["③", ""], ["⑤", ""], ["①", "글에서는 브레이크가 바퀴를 잡아당기며 마찰력을 발생시켜 자전거를 감속시킨다고 설명한다."], ["⑤", "페달을 밟는 것은 운동을 만드는 힘이지, 마찰과는 직접 관련이 없다."]]}, {"no": 3, "items": [["②", ""], ["⑤", ""], ["②", "easier"], ["⑤", "본문에서는 노력에 대해 칭찬받은 아이들은 더 어려운 일에 도전하고 스스로에 대해 긍정적으로 느낀다고 설명하고 있다. 따라서 이 아이들이 어려운 일을 피한다는 것은 사실과 다르다."], ["③", "develop"], ["②", ""], ["④", ""], ["②", ""]]}, {"no": 5, "items": [["⑤", ""], ["①", ""], ["④", "stimulate"], ["③", ""], ["②", ""], ["④", "stimulate"], ["②", ""], ["④", ""]]}, {"no": 7, "items": [["③", ""], ["③", ""], ["④", "회색 다람쥐가 1970년대에 미국에서 도착했다는 내용과 일치하지 않는다."], ["④", ""], ["③", "destroy"], ["①", ""], ["④", ""]]}, {"no": 9, "items": [["①", "청소년들이 그릇된 결정을 내릴 가능성이 높은 이유"], ["③", "emotional"], ["⑤", ""], ["②", ""], ["②", ""], ["⑤", ""], ["④", ""], ["②", "modifying"], ["④", ""]]}, {"no": 11, "items": [["①", ""], ["④", "그들은 식량과 자신들에게 필요한 다른 것들을 생산하는 일을 나눌 수 있었다."], ["③", "더 효율적인 조직을 가능하게 한 농사를 통한 공동체 생활"], ["④", ""], ["⑤", "together"], ["④", ""], ["③", "producing"], ["④", ""]]}, {"no": 13, "items": [["⑤", "network"], ["①", ""], ["③", ""], ["④", "나무들은 당을 전달함으로써 그들 사이의 이 차이를 균등하게 한다."], ["②", "to be photosynthesizing"], ["①", ""], ["③", "서로 뒤처지지 않도록 보충해주는 나무의 연결망"]]}, {"no": 15, "items": [["③", "Costas Efthimiou의 연구가 그 미신을 무너뜨렸다."], ["A vampire exist", ""], ["⑤", ""], ["③", "breaks down"], ["①", "흡혈귀로 존재하지 않는다는 것을 증명하는 계산법"], ["①", "proves"]]}], "17": [{"no": 1, "items": [["③", ""], ["②", ""], ["④", "글에서는 비선형 편집이 실수를 쉽게 수정할 수 있다고 설명하며, 어려운 작업이라고 하지 않는다."], ["⑤", ""], ["①", ""], ["④", ""], ["②", ""], ["②", ""]]}, {"no": 3, "items": [["④", "본문에서는 다이빙 반사는 단지 얼굴이 물속에 들어갔을 때만 활성화된다고 명시되어 있다. 물 근처에 있다고 해서 반사가 발생하는 것이 아니므로 이 진술은 틀렸다."], ["②", "triggered"], ["③", ""], ["①", ""], ["⑤", ""], ["③", ""], ["③", ""], ["③", ""]]}, {"no": 5, "items": [["④", ""], ["⑤", ""], ["①", "has to be built"], ["⑤", ""], ["③", ""], ["②", ""], ["⑤", "useless"], ["③", "keep"]]}, {"no": 7, "items": [["flexibility", ""], ["⑤", ""], ["②", ""], ["②④", "with which / keep"], ["⑤", ""], ["③", ""], ["(A) culture / (B) genes", ""], ["⑤", "surface"]]}, {"no": 9, "items": [["⑤", ""], ["④", ""], ["②", ""], ["②", "were"], ["④", "팀의 전통에 대한 변화가 성과에 미치는 부정적인 영향"], ["③", ""], ["①", ""], ["⑤", ""]]}, {"no": 11, "items": [["④", "(C)-(B)-(A) · 답지에 빠져 있어서 직접 푼 답"], ["④", "끊임없이 변화하는 얼굴: 시간에 따른 변화와 변화에 대한 인식."], ["③", "clear"], ["④", "당신 자신을 보지 않고 10년의 기간이 지난 후, 당신은 거울에서 쳐다보고 있는 사람을 처음에는 알아보지 못할지도 모른다."], ["①④", "reflected, lived"], ["⑤", ""], ["The face you saw reflected in your mirror this morning probably appeared no different from the face you saw the day before", ""]]}, {"no": 13, "items": [["①", "탄수화물의 종류가 신체에 미치는 영향"], ["④", "from which"], ["⑤", ""], ["⑤", "나쁜 탄수화물은 여러분의 몸은 이러한 탄수화물을 상당히 빨리 분해하고 몸이 사용할 수 없는 것은 지방으로 바뀌어 몸에 저장된다."], ["②", ""], ["④", "easy"]]}, {"no": 15, "items": [["④", ""], ["②", "that"], ["④", "텔레비전 시청의 지속적인 사회적 관계망 유지의 한계"], ["③", ""], ["④", "sustainable"], ["⑤", ""], ["⑤", "우리가 텔레비전을 더 볼수록, 우리는 사회적 관계망 속에서 사람들과 함께 시간을 덜 보내기 쉽다."]]}]}, "o2": {"7": [[1, "③"], [2, "③"], [3, "②"], [4, "②"], [5, "④"], [6, "②"], [7, "①"], [8, "①"], [9, "①"], [10, "⑤"], [11, "④"], [12, "②"], [13, "②"], [14, "①"], [15, "③"], [16, "③"], [17, "④"], [18, "③"], [19, "①"], [20, "①"], [21, "①"], [22, "①"], [23, "①"], [24, "⑤"], [25, "③"], [26, "③"], [27, "⑤"], [28, "⑤"], [29, "⑤"], [30, "⑤"], [31, "⑤"], [32, "④"], [33, "③"], [34, "③"], [35, "⑤"], [36, "③"], [37, "④"], [38, "③"], [39, "⑤"], [40, "④"], [41, "④"], [42, "①"], [43, "③"], [44, "④"], [45, "③"], [46, "②"], [47, "②"], [48, "②"], [49, "④"], [50, "⑤"], [51, "④"], [52, "④"], [53, "②"], [54, "②"], [55, "④"], [56, "③"], [57, "⑤"], [58, "①"], [59, "④"], [60, "③"], [61, "③"], [62, "④"], [63, "③"], [64, "④"], [65, "④"], [66, "②"], [67, "①"], [68, "⑤"], [69, "③"], [70, "⑤"], [71, "③"], [72, "④"], [73, "②"], [74, "③"], [75, "③"], [76, "①"], [77, "①"], [78, "②"], [79, "④"], [80, "①"], [81, "②"]], "14": [[82, "②"], [83, "⑤"], [84, "②"], [85, "④"], [86, "④"], [87, "④"], [88, "④"], [89, "③"], [90, "①"], [91, "③"], [92, "①"], [93, "①"], [94, "③"], [95, "③"], [96, "②"], [97, "②"], [98, "④"], [99, "①"], [100, "③"], [101, "③"], [102, "④"], [103, "②"], [104, "⑤"], [105, "①"], [106, "①"], [107, "①"], [108, "①"], [109, "③"], [110, "①"], [111, "①"], [112, "①"], [113, "④"], [114, "③"], [115, "⑤"], [116, "⑤"], [117, "①"], [118, "⑤"], [119, "③"], [120, "①"], [121, "①"], [122, "③"], [123, "②"], [124, "①"], [125, "①"], [126, "①"], [127, "②"], [128, "⑤"], [129, "⑤"], [130, "②"], [131, "①"], [132, "④"], [133, "①"], [134, "①"], [135, "④"], [136, "③"], [137, "⑤"], [138, "①"], [139, "③"], [140, "⑤"], [141, "④"], [142, "①"], [143, "②"], [144, "⑤"], [145, "②"], [146, "④"], [147, "②"], [148, "④"], [149, "③"], [150, "③"], [151, "④"], [152, "②"], [153, "③"], [154, "②"], [155, "③"], [156, "④"], [157, "②"], [158, "③"], [159, "②"], [160, "④"], [161, "②"], [162, "①"], [163, "④"], [164, "①"], [165, "③"], [166, "④"], [167, "⑤"], [168, "③"], [169, "③"], [170, "①"], [171, "②"], [172, "②"], [173, "①"], [174, "⑤"], [175, "⑤"], [176, "⑤"], [177, "⑤"], [178, "⑤"], [179, "③"], [180, "⑤"], [181, "⑤"], [182, "②"], [183, "④"], [184, "①"], [185, "④"], [186, "③"], [187, "②"], [188, "③"], [189, "②"], [190, "③"], [191, "②"]], "16": [[192, "②"], [193, "⑤"], [194, "⑤"], [195, "⑤"], [196, "①"], [197, "①"], [198, "②"], [199, "③"], [200, "①"], [201, "③"], [202, "②"], [203, "⑤"], [204, "①"], [205, "③"], [206, "④"], [207, "⑤"], [208, "②"], [209, "①"], [210, "④"], [211, "⑤"], [212, "②"], [213, "②"], [214, "⑤"], [215, "③"], [216, "③"], [217, "①"], [218, "②"], [219, "②"], [220, "②"], [221, "①"], [222, "④"], [223, "④"], [224, "②"], [225, "③"], [226, "③"], [227, "①"], [228, "②"], [229, "④"], [230, "②"], [231, "②"], [232, "①"], [233, "①"], [234, "⑤"], [235, "①"], [236, "②"], [237, "⑤"], [238, "①"], [239, "③"], [240, "①"], [241, "①"], [242, "①"], [243, "②"], [244, "②"], [245, "②"], [246, "②"], [247, "①"], [248, "⑤"], [249, "①"], [250, "①"], [251, "④"], [252, "①"], [253, "④"], [254, "②"], [255, "③"], [256, "②"], [257, "③"], [258, "②"], [259, "①"], [260, "⑤"], [261, "③"], [262, "①"], [263, "①"], [264, "②"], [265, "②"], [266, "④"], [267, "②"], [268, "②"], [269, "③"], [270, "①"], [271, "⑤"], [272, "④"], [273, "⑤"], [274, "①"], [275, "③"], [276, "①"], [277, "②"], [278, "①"], [279, "⑤"], [280, "①"], [281, "②"], [282, "③"], [283, "③"], [284, "③"], [285, "⑤"], [286, "③"], [287, "⑤"], [288, "⑤"], [289, "②"], [290, "②"], [291, "④"], [292, "④"], [293, "③"], [294, "⑤"], [295, "①"], [296, "⑤"], [297, "⑤"], [298, "③"], [299, "⑤"], [300, "①"]], "17": [[301, "⑤"], [302, "④"], [303, "③"], [304, "④"], [305, "③"], [306, "④"], [307, "③"], [308, "③"], [309, "⑤"], [310, "③"], [311, "⑤"], [312, "⑤"], [313, "⑤"], [314, "⑤"], [315, "②"], [316, "①"], [317, "③"], [318, "②"], [319, "①"], [320, "②"], [321, "⑤"], [322, "④"], [323, "④"], [324, "③"], [325, "②"], [326, "③"], [327, "④"], [328, "①"], [329, "③"], [330, "⑤"], [331, "②"], [332, "①"], [333, "①"], [334, "③"], [335, "⑤"], [336, "②"], [337, "③"], [338, "③"], [339, "⑤"], [340, "①"], [341, "②"], [342, "②"], [343, "⑤"], [344, "①"], [345, "③"], [346, "①"], [347, "②"], [348, "③"], [349, "③"], [350, "①"], [351, "⑤"], [352, "①"], [353, "①"], [354, "②"], [355, "④"], [356, "②"], [357, "④"], [358, "①"], [359, "②"], [360, "③"], [361, "④"], [362, "⑤"], [363, "③"], [364, "⑤"], [365, "③"], [366, "③"], [367, "⑤"], [368, "①"], [369, "④"], [370, "②"], [371, "④"], [372, "①"], [373, "②"], [374, "③"], [375, "④"], [376, "①"], [377, "④"], [378, "⑤"], [379, "⑤"], [380, "⑤"], [381, "①"], [382, "②"], [383, "②"], [384, "⑤"], [385, "②"], [386, "①"], [387, "①"], [388, "①"], [389, "①"], [390, "②"], [391, "④"], [392, "②"], [393, "⑤"], [394, "④"], [395, "③"], [396, "⑤"], [397, "④"], [398, "②"], [399, "③"], [400, "④"], [401, "①"], [402, "①"], [403, "②"], [404, "②"], [405, "①"], [406, "②"], [407, "④"], [408, "⑤"], [409, "③"], [410, "①"], [411, "②"], [412, "③"]]}, "m1": {"groups": [{"label": "Section 1 · 31번 빈칸(1)", "range": [1, 4]}, {"label": "Section 1 · 32번 빈칸(2)", "range": [5, 8]}, {"label": "Section 1 · 33번 빈칸(3)", "range": [9, 12]}, {"label": "Section 1 · 34번 빈칸(4)", "range": [13, 16]}, {"label": "Section 1 · 35번 무관한 문장", "range": [17, 20]}, {"label": "Section 1 · 36번 순서(1)", "range": [21, 24]}, {"label": "Section 1 · 37번 순서(2)", "range": [25, 28]}, {"label": "Section 1 · 38번 문장 넣기(1)", "range": [29, 32]}, {"label": "Section 1 · 39번 문장 넣기(2)", "range": [33, 36]}, {"label": "Section 1 · 40번 요약", "range": [37, 40]}, {"label": "Section 2 · 31번 빈칸(1)", "range": [41, 45]}, {"label": "Section 2 · 32번 빈칸(2)", "range": [46, 50]}, {"label": "Section 2 · 33번 빈칸(3)", "range": [51, 55]}, {"label": "Section 2 · 34번 빈칸(4)", "range": [56, 60]}, {"label": "Section 2 · 35번 무관한 문장", "range": [61, 65]}, {"label": "Section 2 · 36번 순서(1)", "range": [66, 70]}, {"label": "Section 2 · 37번 순서(2)", "range": [71, 75]}, {"label": "Section 2 · 38번 문장 넣기(1)", "range": [76, 80]}, {"label": "Section 2 · 39번 문장 넣기(2)", "range": [81, 85]}, {"label": "Section 2 · 40번 요약", "range": [86, 90]}, {"label": "Section 3 · 종합", "range": [91, 120]}], "ans": {"1": ["②④", "ⓑ which → that / ⓓ transporting → transport"], "2": ["③", ""], "3": ["③", ""], "4": ["⑤", ""], "5": ["③⑤", "ⓒ feeling → to feel / ⓔ if → whether"], "6": ["④", ""], "7": ["②", ""], "8": ["⑤", ""], "9": ["⑤", ""], "10": ["④", ""], "11": ["②", ""], "12": ["③⑤", ""], "13": ["③④", "ⓒ what → that / ⓓ explaining → to explain"], "14": ["④", ""], "15": ["③", ""], "16": ["①②", ""], "17": ["②", ""], "18": ["④", ""], "19": ["④", ""], "20": ["④", ""], "21": ["④", ""], "22": ["②", ""], "23": ["③", ""], "24": ["②④", ""], "25": ["⑤", ""], "26": ["②", ""], "27": ["②", ""], "28": ["②③", ""], "29": ["①", ""], "30": ["②", ""], "31": ["①", ""], "32": ["③⑤", ""], "33": ["④", ""], "34": ["③", ""], "35": ["③", ""], "36": ["①⑤", ""], "37": ["③", ""], "38": ["④", ""], "39": ["②", ""], "40": ["③④⑤", ""], "41": ["③", "ⓒ abundance → scarcity"], "42": ["④", "틀린 것 4개: (A) provide → provides / (B) are → is / (D) reproducing → to reproduce / (E) educating → educated"], "43": ["①", ""], "44": ["④", ""], "45": ["②", ""], "46": ["⑤", "ⓒ that → what / ⓔ indicate → indicates"], "47": ["②", "(B) ignore → address"], "48": ["⑤", ""], "49": ["⑤", ""], "50": ["①", ""], "51": ["①④", ""], "52": ["⑤", ""], "53": ["①", ""], "54": ["⑤", ""], "55": ["③", ""], "56": ["③", "틀린 것 3개"], "57": ["④", ""], "58": ["②", ""], "59": ["⑤", ""], "60": ["③", ""], "61": ["⑤", "ⓔ social → personal"], "62": ["③", "(C) adopting → to adopt"], "63": ["⑤", ""], "64": ["⑤", ""], "65": ["②", ""], "66": ["②④", ""], "67": ["②", "(B) false → true"], "68": ["⑤", ""], "69": ["②", ""], "70": ["③", ""], "71": ["③", "ⓒ possible → impossible"], "72": ["⑤", "(E) to predict → to be predicted"], "73": ["④", ""], "74": ["⑤", ""], "75": ["②", ""], "76": ["①", "ⓐ how certainly → how certain"], "77": ["④", ""], "78": ["④", ""], "79": ["⑤", ""], "80": ["②", ""], "81": ["④", "ⓓ decreases → increases"], "82": ["③", "틀린 것 3개"], "83": ["②", ""], "84": ["⑤", ""], "85": ["①", ""], "86": ["⑤", "(E) harmful → beneficial"], "87": ["①", "ⓐ what → that 또는 which"], "88": ["③", ""], "89": ["③", ""], "90": ["②", ""], "91": ["①", ""], "92": ["③", ""], "93": ["⑤", ""], "94": ["④", ""], "95": ["⑤", ""], "96": ["①", ""], "97": ["④", ""], "98": ["③", ""], "99": ["④", ""], "100": ["④", ""], "101": ["④", ""], "102": ["⑤", ""], "103": ["③", ""], "104": ["⑤", ""], "105": ["⑤", ""], "106": ["⑤", ""], "107": ["⑤", ""], "108": ["①", ""], "109": ["④", ""], "110": ["⑤", ""], "111": ["⑤", ""], "112": ["④", ""], "113": ["⑤", ""], "114": ["⑤", ""], "115": ["②", ""], "116": ["②", ""], "117": ["③", ""], "118": ["②", ""], "119": ["⑤", ""], "120": ["②", ""]}}, "m2": [["①", ""], ["③", "ⓐ, ⓑ, ⓓ는 지문과 일치한다. ⓒ는 모든 인류가 충분한 교육을 받는다고 했으므로 틀리고, ⓔ는 생성형 AI가 풍요로운 사회를 가능하게 할 잠재력이 있다고 했을 뿐 이미 실현했다고 하지는 않는다."], ["④", "has been fully educated"], ["⑤", ""], ["⑤", ""], ["②", ""], ["②", ""], ["②", "자원 부족을 전제로 하는 전통 경제학과 기술로 풍요를 누리는 스타트렉 세계를 비교해 미래 경제의 가능성을 보여 준다."], ["⑤", "글은 생성형 AI가 현실 사회의 여러 영역에서 풍요로움을 확대할 잠재력이 있다고 주장한다."], ["②", ""], ["④", "상대방이 완전히 이해했더라도 이를 보여 주는 반응이 없으면 화자는 경청 여부를 알기 어렵다."], ["①", "주의를 기울이고 이해했더라도 이를 표현하지 않으면 상대방은 경청받았다고 느끼지 못할 수 있다."], ["③", "세 번째 조건은 상대방이 자신의 말을 들었다는 사실을 반응을 통해 보여 주는 것이다."], ["⑤", "주의를 기울이고 내용을 이해한 뒤 이를 인정하는 반응까지 보여 주는 것이 효과적인 경청이다."], ["②", "경청받았다는 느낌을 주려면 실제로 들었다는 사실을 외적으로 표현해야 한다."], ["④", "ⓐ, ⓑ, ⓓ는 글과 일치하며, ⓒ와 ⓔ는 경청을 보여 주는 반응의 중요성을 부정한다."], ["③", ""], ["④", ""], ["④", "ⓐ, ⓑ, ⓓ는 글과 일치하며, ⓒ와 ⓔ는 공간과 경험의 긴밀한 관계를 부정한다."], ["⑤", "어린 시절의 정원과 가족에 관한 기억이 결합된 사례는 장소가 경험의 의미와 얽혀 있음을 보여 준다."], ["⑤", "장소는 경험의 외부적 배경이 아니라 경험을 구성하는 필수적인 매개체로 제시된다."], ["③", ""], ["⑤", "would be"], ["②", ""], ["②", "passive"], ["②", "다윈과 월리스는 변이와 유전이 어떻게 일어나는지 충분히 알지 못했지만 생물학적 진화 모델을 제시했다."], ["⑤", "일부 기초 과정이 설명되지 않더라도 특정 수준에서 유용한 모델을 구축할 수 있다."], ["⑤", "교통 흐름을 모델링할 때 모든 운전자의 개별 판단 과정을 설명하지 않아도 유용한 모델을 만들 수 있다."], ["④", ""], ["④", ""], ["③", ""], ["④", "ⓐ, ⓒ, ⓔ는 지문과 일치하며, ⓑ와 ⓓ는 각각 상속 기작에 대한 설명과 단순화 가정의 필요성을 잘못 서술한다."], ["②", ""], ["③", ""], ["②", "ⓐ, ⓒ, ⓓ는 지문의 핵심 내용과 일치한다. ⓐ는 WHO가 2019년에 번아웃을 직업 관련 현상으로 인정한 일이 직장 정신건강 논의에서 중요한 전환점이 되었다는 내용이다. ⓒ는 임상의가 직업건강 전문가 및 조직의 리더십과 협력해 근본 원인을 다루어야 한다는 설명과 일치한다. ⓓ 역시 번아웃이 조직 문화, 리더십 관행, 더 넓은 사회경제적 맥락과 관련된 구조적 문제라는 내용에 부합한다. 반면 ⓑ는 개인의 회복탄력성에만 집중하라고 하지 않고 조직적 개입을 강조한다는 점에서 틀리며, ⓔ는 개인의 대처를 넘어 정책 차원의 변화가 필요하다는 글의 결론과 반대된다."], ["②", ""], ["⑤", "번아웃의 근본 원인이 조직 환경에 있다면 업무 환경을 개선하는 것이 예방에 도움이 될 수 있다."], ["④", ""], ["③", "번아웃을 개인의 실패나 회복탄력성 부족으로 보던 관점에서 조직의 구조적 문제로 이해하는 관점으로 전환되었다."], ["⑤", "글은 번아웃을 개인의 적응 실패로만 보지 않고 조직 문화와 사회경제적 맥락에 뿌리를 둔 문제로 설명한다."], ["①", ""], ["③", "ⓐ 일치: 글의 첫 문장에서 모든 소리는 매질의 분자들을 교란하는 어떤 움직임에서 시작된다고 설명한다. ⓑ 불일치: 글은 빛의 파동 자체에는 색이 없으며, 색에 대한 인식은 살아 있는 생명체의 뇌에서 일어난다고 한다. ⓒ 일치: 분자들의 물리적 교란은 각종 계기와 기구로 측정할 수 있지만, 뇌가 인식하기 전에는 소리가 아니라고 설명한다. ⓓ 불일치: 나무가 쓰러져 진동을 일으키더라도 이를 듣는 생명체가 없다면 소리가 발생한 것이 아니라는 것이 글의 핵심이다. ⓔ 일치: 글은 소리를 뇌가 만들어 내는 심리적 개념이라고 명시한다."], ["psychological", ""], ["②", ""], ["③", ""], ["④", "나무가 쓰러지는 사례는 물리적 진동의 발생과 소리의 인식이 서로 다르다는 점을 보여 준다."], ["⑤", "물리적 사건으로서의 진동과 생명체가 경험하는 소리는 구별되므로, 둘은 정확히 동일한 것이 아니다."], ["④", "글은 소리를 단순한 물리적 진동이 아니라 뇌의 인식으로 성립하는 심리적 경험으로 정의한다."], ["⑤", ""], ["②", ""], ["④", ""], ["④", "ⓐ 일치: 대면 협업에서는 과업 공간이 의사소통 공간의 부분집합이라고 설명한다. 과업을 수행하면서 상대방과 관련된 의사소통 단서도 함께 확인할 수 있다는 의미이다. ⓑ 불일치: Seamless communication은 과업 공간과 의사소통 공간 사이에 기능적 분리가 없는 상태를 뜻한다. ⓑ는 두 공간이 기능적으로 분리된다고 했으므로 반대이다. ⓒ 일치: 화상 회의에서는 한 화면으로 상대방의 얼굴을 보고 다른 화면으로 공유 문서를 볼 수 있다. 이는 두 공간에 주의를 나누어야 하는 상황이다. ⓓ 불일치: 원격 협업에서는 과업 공간을 보는 동시에 상대방의 여러 의사소통 단서를 확인하기 어렵다. 따라서 모든 단서가 계속 보장된다는 진술은 지문과 일치하지 않는다. ⓔ 일치: 글의 마지막 문장은 원격 의사소통 기술이 과업 공간과 의사소통 공간의 관계에 미치는 영향을 의사소통 모델로 예측해야 한다고 강조한다."], ["④", "impossible"], ["②", ""], ["③", "원격 협업에서 과업과 의사소통 단서 사이에 단절이 생길 수 있으므로, 기술 설계와 의사소통 모델은 사용자의 주의 분배 문제를 고려해야 한다."], ["①", ""], ["⑤", ""], ["(A) seamless / (B) artificial", ""], ["③", ""], ["④", "ⓐ 일치: 글은 1977년에 심리학자 Lynn Hasher와 David Goldstein이 이 실험을 진행했다고 밝힌다. ⓑ 일치: 학생들은 60개의 진술이 참인지 거짓인지 세 차례 평가했으며, 각 평가는 2주 간격으로 이루어졌다. ⓒ 불일치: 반복된 진술은 40개가 아니라 20개였다. 나머지 40개는 새로운 진술이었다. ⓓ 일치: 연구 결과, 진술이 실제로 참인지 거짓인지와 관계없이 반복 노출될수록 그 진술을 믿는 정도가 높아졌다. ⓔ 불일치: 글은 반복이 거짓을 더 정확하게 판별하도록 돕는다고 설명하지 않는다. 오히려 반복 자체가 진술을 더 참처럼 느끼게 할 수 있다는 점을 보여 준다."], ["⑤", ""], ["⑤", ""], ["③", "어떤 소문을 반복해서 듣는 동안 새로운 증거가 없는데도 점점 사실이라고 믿게 되는 것은 착각적 진실 효과의 사례이다."], ["②", "반복은 진술이 실제로 정확하다는 보장이 없어도 사람들이 그것을 더 참이라고 느끼게 할 수 있다."], ["④", ""], ["the more often you hear a statement, the more 'true' it sounds", ""], ["(A) repetition / (B) illusory", ""], ["③", ""], ["③", "주변 압력과 내부 압력이 균형을 이루어야 잠수부가 외부 압력의 영향을 과도하게 느끼는 것을 방지할 수 있다."], ["⑤", "수심이 깊어질수록 외부 압력이 커지므로, 내부와 외부의 압력 균형을 유지하려면 더 높은 압력으로 호흡 기체를 공급해야 한다."], ["⑤", "is required"], ["④", ""], ["①", "ⓐ 일치: 글은 지표면에서 인체 표면 1제곱미터당 약 16~18톤에 해당하는 대기압을 받는다고 설명한다. ⓑ 일치: 폐와 신체 내부 공간의 압력이 외부 대기압과 균형을 이루기 때문에 평상시에는 압력을 느끼지 않는다. ⓒ 불일치: 수압은 수심이 깊어질수록 감소하는 것이 아니라 증가한다. 지문에서는 수심 10미터마다 1 bar씩 증가한다고 설명한다. ⓓ 일치: 수심 10미터에서는 대기압 약 1 bar에 수압 약 1 bar가 더해져 총압이 약 2 bar가 된다. ⓔ 불일치: 호흡 기체는 주변 수압보다 낮은 압력이 아니라, 외부 압력과 균형을 이룰 수 있는 압력으로 공급되어야 한다."], ["②", ""], ["④", ""], ["⑤", "수심 10미터에서는 총압력이 약 2 bar이고, 수심 20미터에서는 약 3 bar이므로 B가 더 높은 압력을 경험한다."], ["④", ""], ["②", "ⓐ 일치: 평화로운 지역의 골든로드는 공격받는 드문 상황에서 가까운 혈연관계의 식물만 이해할 수 있을 정도로 구체적인 신호를 보낸다. ⓑ 불일치: 위험한 지역에서는 혈연관계가 없는 주변 식물도 이해할 수 있는 신호를 전달한다. ⓒ 일치: 화학적 의사소통은 신호를 받는 식물뿐 아니라 보내는 식물에게도 이익이 된다. ⓓ 일치: 어려운 환경에서 고립되면 짝을 찾거나 수분 매개자를 확보하는 데 도움을 받을 기회가 줄어들 수 있다. ⓔ 불일치: 글은 모든 포식자의 접근을 막는 것이 목적이라고 말하지 않는다. 위험한 환경에서 널리 경고를 전달하는 이유는 주변 식물들과 함께 생존하고 번식할 가능성을 높이기 위해서라고 해석할 수 있다."], ["②", ""], ["①", "골든로드는 포식 위험이 낮을 때는 가까운 혈연관계에 특화된 신호를, 위험이 높은 환경에서는 더 넓은 범위가 이해할 수 있는 신호를 사용한다. 따라서 의사소통 방식은 환경의 위험도에 따라 달라질 수 있다."], ["③", "평화로운 지역에서는 가까운 혈연관계만 이해할 수 있는 구체적인 신호를 사용하지만, 위험한 지역에서는 주변의 골든로드 전체가 이해할 수 있는 신호를 사용한다."], ["②", ""], ["⑤", "포식 위험이 낮은 지역에서는 신호가 가까운 혈연관계에 한정되지만, 위험한 지역에서는 신호가 더 넓게 전달된다. 따라서 주변 환경의 위험도가 의사소통 범위에 영향을 준다고 볼 수 있다."], ["①", "혈연관계가 없는 주변 식물에게도 경고를 전달하면 자신이 고립되지 않고, 짝짓기와 수분 매개자 확보에 필요한 공동체를 유지하는 데 도움이 될 수 있다."]]};
+const I={
+ book:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/></svg>',
+ layers:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5z"/><path d="m3 13 9 5 9-5"/></svg>',
+ cal:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>',
+ calc:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18M8 15l2 2 4-4"/></svg>',
+ chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
+ back:'<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>',
+ eye:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+ eyeoff:'<svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18M10.6 5.1A9.9 9.9 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.6C3.8 8.4 2 12 2 12s3.5 7 10 7c1.8 0 3.3-.5 4.6-1.2"/></svg>'
+};
+const SETS=[
+ {id:'o1',name:'1차 올림포스 변형문제',desc:'강 → 지문 번호 → [1-1] 형식',icon:'book'},
+ {id:'o2',name:'2차 올림포스 변형문제',desc:'강 → 번호 구간',icon:'layers'},
+ {id:'m1',name:'26년 10월 1차 변형문제',desc:'31~40번 지문별 · 1~120',icon:'cal'},
+ {id:'m2',name:'26년 10월 2차 변형문제',desc:'번호 구간 · 1~84',icon:'calc'}
+];
+const LS=['7','14','16','17'];
+let S={view:'home',set:null,lec:null,grp:null,hide:false};
+try{S.hide=localStorage.getItem('fin_hide')==='1'}catch(e){}
+const app=document.getElementById('app');
+const isMk=s=>/^[①②③④⑤ ,]+$/.test(s);
+function head(crumb,title){return `<header><button class="back" onclick="goBack()">${I.back}</button><div><div class="crumb">${crumb}</div><div class="title">${title}</div></div></header>`}
+function row(no,a,note,fix){
+ if(a==null) return `<div class="row stag"><div class="no">${no}</div><div class="ans"><div class="miss">답지에 이 번호가 없어요</div></div></div>`;
+ const t=isMk(a)?'mk':'mk txt';
+ const n=note?`<div class="note${fix?' fix':''}">${esc(note)}</div>`:'';
+ return `<div class="row stag"><div class="no">${no}</div><div class="ans" onclick="this.classList.add('open')"><div class="${t}">${esc(a)}</div>${n}</div></div>`;
+}
+function hideBtn(){return `<button class="toggle ${S.hide?'on':''}" onclick="toggleHide()">${S.hide?I.eyeoff+'정답 가림':I.eye+'정답 보임'}</button>`}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+function groups(){
+ if(S.set==='o1') return D.o1[S.lec].map(g=>({key:g.no,label:g.no+'번',sub:g.items.length+'문항'}));
+ if(S.set==='o2'){const arr=D.o2[S.lec];const out=[];for(let i=0;i<arr.length;i+=10){const a=arr[i][0],b=arr[Math.min(i+9,arr.length-1)][0];out.push({key:i,label:a+'~'+b,sub:(Math.min(i+10,arr.length)-i)+'문항'})}return out}
+ if(S.set==='m1') return D.m1.groups.map((g,i)=>({key:i,label:g.label,sub:g.range[0]+'~'+g.range[1]}));
+ if(S.set==='m2'){const out=[];for(let i=1;i<=84;i+=10){const b=Math.min(i+9,84);out.push({key:i,label:i+'~'+b,sub:(b-i+1)+'문항'})}return out}
+}
+let busy=false;
+function render(dir){
+ const set=SETS.find(s=>s.id===S.set);
+ let h='';
+ if(S.view==='home'){
+  h=`<header><div class="logo">fin.<small>변형문제 답지</small></div></header><div class="sec">문제지 고르기</div><div class="sets">`+
+   SETS.map(s=>`<button class="set stag" onclick="pick('${s.id}')"><div class="ic">${I[s.icon]}</div><div><b>${s.name}</b><span>${s.desc}</span></div>${I.chev}</button>`).join('')+`</div>
+   <p class="hint">시험지 번호 그대로 고르면 그 번호의 답만 쭉 나와요. 정답 가림을 켜면 채점 전에 하나씩 탭해서 확인할 수 있어요.</p>`;
+ } else if(S.view==='lec'){
+  h=head('fin.',set.name)+`<div class="sec">강 선택</div><div class="chips">`+
+   LS.map(l=>{const n=S.set==='o1'?D.o1[l].reduce((a,g)=>a+g.items.length,0):D.o2[l].length;
+    const r=S.set==='o2'?D.o2[l][0][0]+'~'+D.o2[l][D.o2[l].length-1][0]:n+'문항';
+    return `<button class="chip stag" onclick="pickLec('${l}')">${l}강<small>${r}</small></button>`}).join('')+`</div>`;
+ } else if(S.view==='grp'){
+  const gs=groups(); const wide=S.set==='m1';
+  h=head(set.name,S.lec?S.lec+'강':'번호 선택')+`<div class="sec">${S.set==='o1'?'시험지 번호 선택':'번호 구간 선택'}</div><div class="chips${wide?' wide':''}">`+
+   gs.map(g=>`<button class="chip stag" onclick="pickGrp(${JSON.stringify(g.key)})">${g.label}<small>${g.sub}</small></button>`).join('')+`</div>`;
+ } else if(S.view==='ans'){
+  const gs=groups(); const idx=gs.findIndex(g=>g.key===S.grp); const g=gs[idx];
+  let rows='';
+  if(S.set==='o1'){const grp=D.o1[S.lec].find(x=>x.no===S.grp);
+   rows=grp.items.map((it,i)=>row(`[${grp.no}-${i+1}]`,it?it[0]:null,it?it[1]:'',false)).join('');}
+  else if(S.set==='o2'){rows=D.o2[S.lec].slice(S.grp,S.grp+10).map(([n,a])=>row(n+'.',a,'',false)).join('');}
+  else if(S.set==='m1'){const [a,b]=D.m1.groups[S.grp].range;for(let n=a;n<=b;n++){const [x,nt]=D.m1.ans[n];rows+=row(n+')',x,nt,!!nt)}}
+  else {for(let n=S.grp;n<=Math.min(S.grp+9,84);n++){const [x,nt]=D.m2[n-1];rows+=row(n+')',x,nt,false)}}
+  const title=S.set==='o1'?S.lec+'강 '+S.grp+'번':(S.lec?S.lec+'강 ':'')+g.label;
+  h=head(set.name,title)+`<div class="bar"><div class="sec">정답</div>${hideBtn()}</div><div class="list ${S.hide?'hide':''}">${rows}</div>
+   <div class="nav"><button ${idx<=0?'disabled':''} onclick="pickGrp(${JSON.stringify(gs[idx-1]?.key??null)},-1)">‹ ${gs[idx-1]?gs[idx-1].label.replace(/^Section \d · /,''):'처음'}</button><button ${idx>=gs.length-1?'disabled':''} onclick="pickGrp(${JSON.stringify(gs[idx+1]?.key??null)},1)">${gs[idx+1]?gs[idx+1].label.replace(/^Section \d · /,''):'끝'} ›</button></div>`;
+ }
+ swap(h,dir||0);
+}
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function swap(h,dir){
+ const old=app.querySelector('.view');
+ const put=()=>{
+  app.innerHTML='<div class="view">'+h+'</div>';
+  const v=app.querySelector('.view');
+  v.querySelectorAll('.stag').forEach((el,i)=>el.style.animationDelay=Math.min(i*15,180)+'ms');
+  window.scrollTo({top:0});
+  if(!RM&&dir) v.animate([{opacity:0,transform:`translateX(${dir*18}px)`},{opacity:1,transform:'none'}],{duration:220,easing:'cubic-bezier(.2,.8,.2,1)'});
+  else if(!RM) v.animate([{opacity:0},{opacity:1}],{duration:180,easing:'ease'});
+ };
+ if(!old||RM){put();return}
+ busy=true;
+ const a=old.animate([{opacity:1,transform:'none'},{opacity:0,transform:`translateX(${-dir*14}px)`}],{duration:90,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'});
+ let done=false;const fin=()=>{if(done)return;done=true;busy=false;put()};a.onfinish=fin;setTimeout(fin,110);
+}
+function pick(id){if(busy)return;S.set=id;S.lec=null;S.grp=null;S.view=(id==='o1'||id==='o2')?'lec':'grp';render(1)}
+function pickLec(l){if(busy)return;S.lec=l;S.view='grp';render(1)}
+function pickGrp(k,d){if(k===null||busy)return;S.grp=k;S.view='ans';render(d||1)}
+function toggleHide(){S.hide=!S.hide;try{localStorage.setItem('fin_hide',S.hide?'1':'0')}catch(e){}
+ const l=app.querySelector('.list'); if(l){l.querySelectorAll('.ans.open').forEach(a=>a.classList.remove('open'));l.classList.toggle('hide',S.hide)}
+ const b=app.querySelector('.toggle'); if(b){b.classList.toggle('on',S.hide);b.innerHTML=S.hide?I.eyeoff+'정답 가림':I.eye+'정답 보임'}}
+function goBack(){if(busy)return;if(S.view==='ans')S.view='grp';else if(S.view==='grp')S.view=S.lec?'lec':'home';else S.view='home';if(busy)return;if(S.view==='lec')S.lec=null;render(-1)}
+render();
+if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js').catch(()=>{})}catch(e){}}
+</script>
+</body>
+</html>
